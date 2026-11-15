@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Dashboard – CampusCare</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+</head>
+<body class="dashboard-page" id="studentDashboardPage">
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-brand">
+        <div class="brand-icon small"><i class="fas fa-university"></i></div>
+        <div class="brand-text">
+          <span class="brand-name">CampusCare</span>
+        </div>
+      </div>
+      <button class="sidebar-close" id="sidebarClose"><i class="fas fa-times"></i></button>
+    </div>
+
+    <div class="sidebar-user">
+      <div class="sidebar-avatar"><i class="fas fa-user-graduate"></i></div>
+      <div class="sidebar-user-info">
+        <span class="sidebar-user-name" id="sidebarUserName">Student</span>
+        <span class="sidebar-user-role">Student</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <ul>
+        <li class="nav-item active" data-page="overview">
+          <a href="#overview"><i class="fas fa-th-large"></i> Dashboard</a>
+        </li>
+        <li class="nav-item" data-page="submit">
+          <a href="#submit"><i class="fas fa-plus-circle"></i> Submit Complaint</a>
+        </li>
+        <li class="nav-item" data-page="mycomplaints">
+          <a href="#mycomplaints"><i class="fas fa-list-alt"></i> My Complaints</a>
+        </li>
+        <li class="nav-item" data-page="escalate">
+          <a href="#escalate"><i class="fas fa-level-up-alt"></i> Escalations <span class="sidebar-badge" id="escalateBadge" style="display:none"></span></a>
+        </li>
+        <li class="nav-item" data-page="track">
+          <a href="#track"><i class="fas fa-search"></i> Track Status</a>
+        </li>
+        <li class="nav-item" data-page="profile">
+          <a href="#profile"><i class="fas fa-user-cog"></i> My Profile</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="btn-dark-toggle sidebar-dark-btn" id="darkToggle" title="Toggle Dark Mode">
+        <i class="fas fa-moon"></i> Dark Mode
+      </button>
+      <button class="btn-logout" id="studentLogout">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="main-wrapper" id="mainWrapper">
+    <!-- Top Bar -->
+    <header class="topbar">
+      <button class="topbar-menu-btn" id="menuToggle"><i class="fas fa-bars"></i></button>
+      <div class="topbar-title" id="topbarTitle">Dashboard Overview</div>
+      <div class="topbar-actions">
+        <button class="topbar-notif" id="topbarNotif" title="Notifications">
+          <i class="fas fa-bell"></i>
+          <span class="notif-badge" id="notifBadge" style="display:none">0</span>
+        </button>
+        <div class="topbar-user">
+          <div class="topbar-avatar"><i class="fas fa-user-graduate"></i></div>
+          <span id="topbarUserName">Student</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Dashboard Content -->
+    <main class="dashboard-content">
+
+      <!-- ============ OVERVIEW PAGE ============ -->
+      <section class="dash-page active" id="page-overview">
+        <div class="page-header">
+          <h2>Dashboard Overview</h2>
+          <p class="page-subtitle" id="welcomeMsg">Welcome back! Here's a summary of your complaints.</p>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+          <div class="stat-card blue">
+            <div class="stat-card-icon"><i class="fas fa-inbox"></i></div>
+            <div class="stat-card-info">
+              <span class="stat-card-num" id="statTotal">0</span>
+              <span class="stat-card-label">Total Complaints</span>
+            </div>
+          </div>
+          <div class="stat-card orange">
+            <div class="stat-card-icon"><i class="fas fa-clock"></i></div>
+            <div class="stat-card-info">
+              <span class="stat-card-num" id="statPending">0</span>
+              <span class="stat-card-label">Pending</span>
+            </div>
+          </div>
+          <div class="stat-card teal">
+            <div class="stat-card-icon"><i class="fas fa-spinner"></i></div>
+            <div class="stat-card-info">
+              <span class="stat-card-num" id="statInProgress">0</span>
+              <span class="stat-card-label">In Progress</span>
+            </div>
+          </div>
+          <div class="stat-card green">
+            <div class="stat-card-icon"><i class="fas fa-check-circle"></i></div>
+            <div class="stat-card-info">
+              <span class="stat-card-num" id="statResolved">0</span>
+              <span class="stat-card-label">Resolved</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Complaints -->
+        <div class="dash-section">
+          <div class="dash-section-header">
+            <h3><i class="fas fa-history"></i> Recent Complaints</h3>
+            <button class="btn-link" onclick="switchPage('mycomplaints')">View All <i class="fas fa-arrow-right"></i></button>
+          </div>
+          <div class="complaints-table-wrap">
+            <table class="complaints-table">
+              <thead>
+                <tr>
+                  <th>Complaint ID</th>
+                  <th>Title</th>
+                  <th>Category</th>
+                  <th>Priority</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="recentComplaintsBody">
+                <tr><td colspan="6" class="empty-row"><i class="fas fa-inbox"></i> No complaints yet</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+          <h3><i class="fas fa-bolt"></i> Quick Actions</h3>
+          <div class="quick-actions-grid">
+            <button class="quick-btn blue" onclick="switchPage('submit')">
+              <i class="fas fa-plus-circle"></i>
+              <span>New Complaint</span>
+            </button>
+            <button class="quick-btn orange" onclick="switchPage('track')">
+              <i class="fas fa-search"></i>
+              <span>Track Status</span>
+            </button>
+            <button class="quick-btn green" onclick="switchPage('mycomplaints')">
+              <i class="fas fa-list-alt"></i>
+              <span>My Complaints</span>
+            </button>
+            <button class="quick-btn purple" onclick="switchPage('profile')">
+              <i class="fas fa-user-cog"></i>
+              <span>My Profile</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ SUBMIT COMPLAINT PAGE ============ -->
+      <section class="dash-page" id="page-submit">
+        <div class="page-header">
+          <h2><i class="fas fa-plus-circle"></i> Submit New Complaint</h2>
+          <p class="page-subtitle">Fill in the details below. A unique complaint ID will be generated automatically.</p>
+        </div>
+
+        <div class="alert alert-success" id="submitSuccess" style="display:none;"></div>
+        <div class="alert alert-error" id="submitError" style="display:none;"></div>
+
+        <div class="form-card">
+          <form id="complaintForm" novalidate>
+
+            <!-- ANONYMOUS TOGGLE -->
+            <div class="anon-toggle-box" id="anonToggleBox">
+              <div class="anon-toggle-left">
+                <div class="anon-icon"><i class="fas fa-user-secret"></i></div>
+                <div class="anon-text">
+                  <strong>Submit Anonymously</strong>
+                  <p>Your name and enrollment number will be hidden from admin. Only the system records your identity.</p>
+                </div>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" id="cAnonymous"/>
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+            <div class="anon-warning" id="anonWarning" style="display:none;">
+              <i class="fas fa-shield-alt"></i>
+              <span>Anonymous mode is ON. Admin will see <strong>"Anonymous Student"</strong> instead of your name.</span>
+            </div>
+
+            <div class="form-group">
+              <label for="cTitle"><i class="fas fa-heading"></i> Complaint Title <span class="required">*</span></label>
+              <input type="text" id="cTitle" placeholder="Brief title of the issue (e.g., WiFi not working in Lab 3)" required/>
+              <span class="field-error" id="cTitleErr"></span>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="cCategory"><i class="fas fa-tag"></i> Category <span class="required">*</span></label>
+                <select id="cCategory" required>
+                  <option value="">Select Category</option>
+                  <option value="Electrical">⚡ Electrical</option>
+                  <option value="Water">💧 Water</option>
+                  <option value="Cleanliness">🧹 Cleanliness</option>
+                  <option value="WiFi">📶 WiFi</option>
+                  <option value="Classroom">🏫 Classroom</option>
+                  <option value="Hostel">🏠 Hostel</option>
+                  <option value="Others">➕ Others</option>
+                </select>
+                <span class="field-error" id="cCategoryErr"></span>
+              </div>
+              <div class="form-group">
+                <label for="cPriority"><i class="fas fa-exclamation-triangle"></i> Priority <span class="required">*</span></label>
+                <select id="cPriority" required>
+                  <option value="">Select Priority</option>
+                  <option value="Low">🟢 Low</option>
+                  <option value="Medium">🟡 Medium</option>
+                  <option value="High">🔴 High</option>
+                  <option value="Urgent">🚨 Urgent</option>
+                </select>
+                <span class="field-error" id="cPriorityErr"></span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="cLocation"><i class="fas fa-map-marker-alt"></i> Location / Block</label>
+              <input type="text" id="cLocation" placeholder="e.g. Block B, Room 201, Computer Lab 3"/>
+            </div>
+            <div class="form-group">
+              <label for="cDescription"><i class="fas fa-align-left"></i> Description <span class="required">*</span></label>
+              <textarea id="cDescription" rows="5" placeholder="Describe the issue in detail. Include when it started, how it affects you, and any relevant details..." required></textarea>
+              <div class="char-count"><span id="charCount">0</span>/500 characters</div>
+              <span class="field-error" id="cDescErr"></span>
+            </div>
+
+            <!-- PHOTO UPLOAD -->
+            <div class="form-group">
+              <label><i class="fas fa-camera"></i> Attach Photos <span class="optional-tag">Optional – max 3 photos</span></label>
+              <div class="photo-upload-area" id="photoUploadArea">
+                <input type="file" id="cPhotos" accept="image/*" multiple style="display:none"/>
+                <div class="photo-upload-placeholder" id="photoPlaceholder" onclick="document.getElementById('cPhotos').click()">
+                  <i class="fas fa-cloud-upload-alt"></i>
+                  <p>Click to upload or drag &amp; drop photos here</p>
+                  <span>JPG, PNG, WEBP – Max 5MB each</span>
+                </div>
+                <div class="photo-previews" id="photoPreviews"></div>
+              </div>
+            </div>
+
+            <!-- ESCALATE TOGGLE -->
+            <div class="escalate-box" id="escalateBox">
+              <div class="escalate-header">
+                <div class="escalate-icon"><i class="fas fa-level-up-alt"></i></div>
+                <div class="escalate-text">
+                  <strong>Escalate to Higher Authority</strong>
+                  <p>Send this complaint directly to Principal / HOD / College Management if the issue is serious and requires urgent attention.</p>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="cEscalate"/>
+                  <span class="toggle-slider escalate-slider"></span>
+                </label>
+              </div>
+              <div class="escalate-authority-selector" id="escalateAuthoritySelector" style="display:none;">
+                <label for="cAuthority"><i class="fas fa-user-tie"></i> Escalate to</label>
+                <select id="cAuthority">
+                  <option value="HOD">🏛️ Head of Department (HOD)</option>
+                  <option value="Principal">🎓 Principal</option>
+                  <option value="Management">🏢 College Management</option>
+                  <option value="Dean">👨‍🏫 Dean of Students</option>
+                </select>
+                <div class="escalate-notice">
+                  <i class="fas fa-exclamation-circle"></i>
+                  Escalated complaints are flagged with <strong>HIGH PRIORITY</strong> and reviewed within 24 hours.
+                </div>
+              </div>
+            </div>
+
+            <div class="form-note">
+              <i class="fas fa-info-circle"></i>
+              A unique <strong>Complaint ID</strong> and <strong>timestamp</strong> will be auto-generated when you submit.
+            </div>
+            <div class="form-actions">
+              <button type="reset" class="btn-secondary" id="clearFormBtn">
+                <i class="fas fa-undo"></i> Clear Form
+              </button>
+              <button type="submit" class="btn-primary" id="submitComplaintBtn">
+                <i class="fas fa-paper-plane"></i> Submit Complaint
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- ============ MY COMPLAINTS PAGE ============ -->
+      <section class="dash-page" id="page-mycomplaints">
+        <div class="page-header">
+          <h2><i class="fas fa-list-alt"></i> My Complaints</h2>
+          <p class="page-subtitle">View and manage all your submitted complaints</p>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="filter-bar">
+          <div class="filter-group">
+            <i class="fas fa-filter"></i>
+            <select id="filterStatus">
+              <option value="">All Status</option>
+              <option value="Pending">Pending</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Resolved">Resolved</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <i class="fas fa-tag"></i>
+            <select id="filterCategory">
+              <option value="">All Categories</option>
+              <option value="Electrical">Electrical</option>
+              <option value="Water">Water</option>
+              <option value="Cleanliness">Cleanliness</option>
+              <option value="WiFi">WiFi</option>
+              <option value="Classroom">Classroom</option>
+              <option value="Hostel">Hostel</option>
+              <option value="Others">Others</option>
+            </select>
+          </div>
+          <div class="search-group">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchComplaints" placeholder="Search complaints..."/>
+          </div>
+        </div>
+
+        <div class="complaints-table-wrap">
+          <table class="complaints-table">
+            <thead>
+              <tr>
+                <th>Complaint ID</th>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Priority</th>
+                <th>Date Submitted</th>
+                <th>Status</th>
+                <th>Flags</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="myComplaintsBody">
+              <tr><td colspan="8" class="empty-row"><i class="fas fa-inbox"></i> No complaints submitted yet</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ============ ESCALATIONS PAGE ============ -->
+      <section class="dash-page" id="page-escalate">
+        <div class="page-header">
+          <h2><i class="fas fa-level-up-alt"></i> My Escalated Complaints</h2>
+          <p class="page-subtitle">Complaints you have escalated to higher authorities</p>
+        </div>
+        <div class="escalation-info-banner">
+          <i class="fas fa-info-circle"></i>
+          <div>
+            <strong>How Escalation Works</strong>
+            <p>When you escalate a complaint, it is flagged and sent directly to the designated authority (HOD, Principal, Management). They will review it within 24 hours and respond with high priority.</p>
+          </div>
+        </div>
+        <div class="complaints-table-wrap">
+          <table class="complaints-table">
+            <thead>
+              <tr>
+                <th>Complaint ID</th>
+                <th>Title</th>
+                <th>Escalated To</th>
+                <th>Priority</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="escalatedComplaintsBody">
+              <tr><td colspan="7" class="empty-row"><i class="fas fa-level-up-alt"></i> No escalated complaints</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ============ TRACK STATUS PAGE ============ -->
+      <section class="dash-page" id="page-track">
+        <div class="page-header">
+          <h2><i class="fas fa-search"></i> Track Complaint Status</h2>
+          <p class="page-subtitle">Enter your complaint ID to check the current status</p>
+        </div>
+
+        <div class="form-card track-card">
+          <div class="form-group">
+            <label for="trackId"><i class="fas fa-hashtag"></i> Complaint ID</label>
+            <div class="track-input-row">
+              <input type="text" id="trackId" placeholder="e.g. CC-2024-0001"/>
+              <button class="btn-primary" onclick="trackComplaint()">
+                <i class="fas fa-search"></i> Track
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div id="trackResult" style="display:none;" class="track-result-card">
+          <!-- Filled by JS -->
+        </div>
+      </section>
+
+      <!-- ============ PROFILE PAGE ============ -->
+      <section class="dash-page" id="page-profile">
+        <div class="page-header">
+          <h2><i class="fas fa-user-cog"></i> My Profile</h2>
+          <p class="page-subtitle">Your account information</p>
+        </div>
+
+        <div class="profile-card">
+          <div class="profile-avatar-section">
+            <div class="profile-big-avatar"><i class="fas fa-user-graduate"></i></div>
+            <div class="profile-badge">Student</div>
+          </div>
+          <div class="profile-info" id="profileInfo">
+            <!-- Filled by JS -->
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Image Lightbox -->
+  <div class="lightbox-overlay" id="lightboxOverlay" style="display:none;" onclick="closeLightbox()">
+    <button class="lightbox-close" onclick="closeLightbox()"><i class="fas fa-times"></i></button>
+    <button class="lightbox-prev" id="lightboxPrev" onclick="event.stopPropagation();lightboxNav(-1)"><i class="fas fa-chevron-left"></i></button>
+    <img class="lightbox-img" id="lightboxImg" src="" alt="Complaint photo"/>
+    <button class="lightbox-next" id="lightboxNext" onclick="event.stopPropagation();lightboxNav(1)"><i class="fas fa-chevron-right"></i></button>
+    <div class="lightbox-counter" id="lightboxCounter"></div>
+  </div>
+
+  <!-- Notification Popup -->
+  <div class="notification-popup" id="notificationPopup" style="display:none;">
+    <div class="notif-icon"><i class="fas fa-check-circle"></i></div>
+    <div class="notif-content">
+      <strong id="notifTitle">Complaint Submitted!</strong>
+      <p id="notifMsg">Your complaint has been registered.</p>
+    </div>
+    <button class="notif-close" onclick="closeNotification()"><i class="fas fa-times"></i></button>
+  </div>
+
+  <!-- Sidebar Overlay -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- Complaint Detail Modal -->
+  <div class="modal-overlay" id="modalOverlay" style="display:none;">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3><i class="fas fa-file-alt"></i> Complaint Details</h3>
+        <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

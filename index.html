@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CampusCare – Smart Complaint Management System</title>
+  <meta name="description" content="CampusCare is the official complaint management portal for college students. Submit, track and resolve campus issues efficiently."/>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+</head>
+<body class="home-page">
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">
+        <div class="brand-icon"><i class="fas fa-university"></i></div>
+        <div class="brand-text">
+          <span class="brand-name">CampusCare</span>
+          <span class="brand-sub">Complaint Portal</span>
+        </div>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="student-login.html">Student Login</a></li>
+        <li><a href="admin-login.html">Admin Login</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="btn-dark-toggle" id="darkToggle" title="Toggle Dark Mode">
+          <i class="fas fa-moon"></i>
+        </button>
+        <a href="student-login.html" class="btn-nav-cta">Get Started</a>
+        <button class="hamburger" id="hamburger">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-bg-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge"><i class="fas fa-shield-alt"></i> Official College Portal</div>
+      <h1 class="hero-title">Smart Complaint<br><span class="highlight">Management System</span></h1>
+      <p class="hero-desc">Submit, track, and resolve campus issues efficiently. CampusCare ensures your voice is heard and problems are fixed – fast.</p>
+      <div class="hero-actions">
+        <a href="student-login.html" class="btn-primary">
+          <i class="fas fa-sign-in-alt"></i> Student Login
+        </a>
+        <a href="student-register.html" class="btn-outline">
+          <i class="fas fa-user-plus"></i> Register Now
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item" id="statComplaints">
+          <span class="stat-num" data-target="0">0</span>
+          <span class="stat-label">Complaints Filed</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item" id="statResolved">
+          <span class="stat-num" data-target="0">0</span>
+          <span class="stat-label">Resolved</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-num">24/7</span>
+          <span class="stat-label">Support</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-image">
+      <div class="hero-card-mockup">
+        <div class="mockup-header">
+          <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+          <span class="mockup-title">Complaint Dashboard</span>
+        </div>
+        <div class="mockup-body">
+          <div class="mockup-stat-row">
+            <div class="mockup-stat blue"><i class="fas fa-inbox"></i><span>12 Pending</span></div>
+            <div class="mockup-stat orange"><i class="fas fa-spinner"></i><span>5 In Progress</span></div>
+          </div>
+          <div class="mockup-stat-row">
+            <div class="mockup-stat green"><i class="fas fa-check-circle"></i><span>28 Resolved</span></div>
+            <div class="mockup-stat purple"><i class="fas fa-list"></i><span>45 Total</span></div>
+          </div>
+          <div class="mockup-complaint">
+            <div class="mockup-badge pending">PENDING</div>
+            <div class="mockup-ctitle">WiFi not working in Block B</div>
+            <div class="mockup-cid">#CC-2024-0042</div>
+          </div>
+          <div class="mockup-complaint">
+            <div class="mockup-badge resolved">RESOLVED</div>
+            <div class="mockup-ctitle">Broken bench in Room 201</div>
+            <div class="mockup-cid">#CC-2024-0038</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">How It Works</span>
+        <h2>Simple. Fast. Effective.</h2>
+        <p>A streamlined process to get your campus issues resolved quickly</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num">01</div>
+          <div class="step-icon blue"><i class="fas fa-user-plus"></i></div>
+          <h3>Register & Login</h3>
+          <p>Create your student account with your enrollment number and college email address.</p>
+        </div>
+        <div class="step-connector"><i class="fas fa-arrow-right"></i></div>
+        <div class="step-card">
+          <div class="step-num">02</div>
+          <div class="step-icon orange"><i class="fas fa-pen-alt"></i></div>
+          <h3>Submit Complaint</h3>
+          <p>Fill in your complaint details, select category and priority. A unique ID is auto-generated.</p>
+        </div>
+        <div class="step-connector"><i class="fas fa-arrow-right"></i></div>
+        <div class="step-card">
+          <div class="step-num">03</div>
+          <div class="step-icon green"><i class="fas fa-search"></i></div>
+          <h3>Track Status</h3>
+          <p>Use your complaint ID to track real-time status updates from Pending to Resolved.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories Section -->
+  <section class="categories-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Complaint Categories</span>
+        <h2>What Can You Report?</h2>
+        <p>We handle all types of campus infrastructure and facility issues</p>
+      </div>
+      <div class="categories-grid">
+        <div class="cat-card" data-cat="Electrical">
+          <div class="cat-icon yellow"><i class="fas fa-bolt"></i></div>
+          <span>Electrical</span>
+        </div>
+        <div class="cat-card" data-cat="Water">
+          <div class="cat-icon blue"><i class="fas fa-tint"></i></div>
+          <span>Water</span>
+        </div>
+        <div class="cat-card" data-cat="Cleanliness">
+          <div class="cat-icon green"><i class="fas fa-broom"></i></div>
+          <span>Cleanliness</span>
+        </div>
+        <div class="cat-card" data-cat="WiFi">
+          <div class="cat-icon purple"><i class="fas fa-wifi"></i></div>
+          <span>WiFi</span>
+        </div>
+        <div class="cat-card" data-cat="Classroom">
+          <div class="cat-icon teal"><i class="fas fa-chalkboard-teacher"></i></div>
+          <span>Classroom</span>
+        </div>
+        <div class="cat-card" data-cat="Hostel">
+          <div class="cat-icon red"><i class="fas fa-home"></i></div>
+          <span>Hostel</span>
+        </div>
+        <div class="cat-card" data-cat="Others">
+          <div class="cat-icon gray"><i class="fas fa-ellipsis-h"></i></div>
+          <span>Others</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-box">
+        <div class="cta-content">
+          <h2>Have an Issue on Campus?</h2>
+          <p>Don't stay quiet. Report it now and help keep your campus better for everyone.</p>
+          <div class="cta-actions">
+            <a href="student-register.html" class="btn-primary">
+              <i class="fas fa-user-plus"></i> Register as Student
+            </a>
+            <a href="student-login.html" class="btn-white">
+              <i class="fas fa-sign-in-alt"></i> Already Registered?
+            </a>
+          </div>
+        </div>
+        <div class="cta-image">
+          <i class="fas fa-bullhorn"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-brand">
+            <div class="brand-icon"><i class="fas fa-university"></i></div>
+            <div class="brand-text">
+              <span class="brand-name">CampusCare</span>
+              <span class="brand-sub">Complaint Portal</span>
+            </div>
+          </div>
+          <p>Making campus life better, one complaint at a time. Your voice matters to us.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="student-login.html"><i class="fas fa-user"></i> Student Login</a></li>
+            <li><a href="admin-login.html"><i class="fas fa-user-shield"></i> Admin Login</a></li>
+            <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Contact</h4>
+          <p><i class="fas fa-envelope"></i> support@campuscare.edu</p>
+          <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+          <p><i class="fas fa-map-marker-alt"></i> Admin Block, Room 101</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 CampusCare. All rights reserved. | Designed for College Project</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

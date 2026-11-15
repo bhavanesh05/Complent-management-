@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register – CampusCare</title>
+  <meta name="description" content="Create your CampusCare student account to start submitting campus complaints."/>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+</head>
+<body class="auth-page">
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">
+        <div class="brand-icon"><i class="fas fa-university"></i></div>
+        <div class="brand-text">
+          <span class="brand-name">CampusCare</span>
+          <span class="brand-sub">Complaint Portal</span>
+        </div>
+      </a>
+      <div class="nav-actions">
+        <button class="btn-dark-toggle" id="darkToggle" title="Toggle Dark Mode">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="auth-main">
+    <div class="auth-container">
+      <div class="auth-left">
+        <div class="auth-left-content">
+          <div class="auth-left-icon"><i class="fas fa-shield-alt"></i></div>
+          <h2>Join CampusCare</h2>
+          <p>Register once and start reporting campus issues. Help make your college a better place.</p>
+          <div class="auth-features">
+            <div class="auth-feature"><i class="fas fa-check-circle"></i> Free student registration</div>
+            <div class="auth-feature"><i class="fas fa-check-circle"></i> Secure & confidential</div>
+            <div class="auth-feature"><i class="fas fa-check-circle"></i> Get updates on your complaints</div>
+          </div>
+        </div>
+      </div>
+      <div class="auth-right">
+        <div class="auth-card">
+          <div class="auth-card-header">
+            <div class="auth-avatar"><i class="fas fa-user-plus"></i></div>
+            <h1>Create Account</h1>
+            <p>Fill in your details to register</p>
+          </div>
+
+          <div class="alert alert-error" id="regError" style="display:none;"></div>
+          <div class="alert alert-success" id="regSuccess" style="display:none;"></div>
+
+          <form id="registerForm" class="auth-form" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="regFirstName"><i class="fas fa-user"></i> First Name</label>
+                <input type="text" id="regFirstName" placeholder="First name" required/>
+                <span class="field-error" id="regFNameErr"></span>
+              </div>
+              <div class="form-group">
+                <label for="regLastName"><i class="fas fa-user"></i> Last Name</label>
+                <input type="text" id="regLastName" placeholder="Last name" required/>
+                <span class="field-error" id="regLNameErr"></span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="regEnroll"><i class="fas fa-id-card"></i> Enrollment Number</label>
+              <input type="text" id="regEnroll" placeholder="e.g. 2024CS001" required/>
+              <span class="field-error" id="regEnrollErr"></span>
+            </div>
+            <div class="form-group">
+              <label for="regEmail"><i class="fas fa-envelope"></i> College Email</label>
+              <input type="email" id="regEmail" placeholder="yourname@college.edu" required/>
+              <span class="field-error" id="regEmailErr"></span>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="regDept"><i class="fas fa-book"></i> Department</label>
+                <select id="regDept" required>
+                  <option value="">Select Dept.</option>
+                  <option>Computer Science</option>
+                  <option>Electronics</option>
+                  <option>Mechanical</option>
+                  <option>Civil</option>
+                  <option>MBA</option>
+                  <option>MCA</option>
+                  <option>Other</option>
+                </select>
+                <span class="field-error" id="regDeptErr"></span>
+              </div>
+              <div class="form-group">
+                <label for="regYear"><i class="fas fa-calendar"></i> Year</label>
+                <select id="regYear" required>
+                  <option value="">Year</option>
+                  <option>1st Year</option>
+                  <option>2nd Year</option>
+                  <option>3rd Year</option>
+                  <option>4th Year</option>
+                </select>
+                <span class="field-error" id="regYearErr"></span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="regPhone"><i class="fas fa-phone"></i> Phone Number</label>
+              <input type="tel" id="regPhone" placeholder="10-digit phone number" required/>
+              <span class="field-error" id="regPhoneErr"></span>
+            </div>
+            <div class="form-group">
+              <label for="regPassword"><i class="fas fa-lock"></i> Password</label>
+              <div class="input-with-icon">
+                <input type="password" id="regPassword" placeholder="Minimum 6 characters" required/>
+                <button type="button" class="toggle-pass" onclick="togglePassword('regPassword', this)">
+                  <i class="fas fa-eye"></i>
+                </button>
+              </div>
+              <span class="field-error" id="regPassErr"></span>
+            </div>
+            <div class="form-group">
+              <label for="regConfirmPass"><i class="fas fa-lock"></i> Confirm Password</label>
+              <div class="input-with-icon">
+                <input type="password" id="regConfirmPass" placeholder="Re-enter password" required/>
+                <button type="button" class="toggle-pass" onclick="togglePassword('regConfirmPass', this)">
+                  <i class="fas fa-eye"></i>
+                </button>
+              </div>
+              <span class="field-error" id="regConfirmPassErr"></span>
+            </div>
+            <button type="submit" class="btn-form-submit" id="regBtn">
+              <span class="btn-text"><i class="fas fa-user-plus"></i> Create Account</span>
+              <span class="btn-loader" style="display:none;"><i class="fas fa-spinner fa-spin"></i> Registering...</span>
+            </button>
+          </form>
+
+          <div class="auth-divider"><span>or</span></div>
+          <p class="auth-switch">Already have an account? <a href="student-login.html">Login here</a></p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

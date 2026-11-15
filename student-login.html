@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Login – CampusCare</title>
+  <meta name="description" content="Login to CampusCare student portal to submit and track your campus complaints."/>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+</head>
+<body class="auth-page">
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">
+        <div class="brand-icon"><i class="fas fa-university"></i></div>
+        <div class="brand-text">
+          <span class="brand-name">CampusCare</span>
+          <span class="brand-sub">Complaint Portal</span>
+        </div>
+      </a>
+      <div class="nav-actions">
+        <button class="btn-dark-toggle" id="darkToggle" title="Toggle Dark Mode">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="auth-main">
+    <div class="auth-container">
+      <div class="auth-left">
+        <div class="auth-left-content">
+          <div class="auth-left-icon"><i class="fas fa-graduation-cap"></i></div>
+          <h2>Welcome Back!</h2>
+          <p>Log in to access your CampusCare dashboard and manage your complaints.</p>
+          <div class="auth-features">
+            <div class="auth-feature"><i class="fas fa-check-circle"></i> Submit complaints instantly</div>
+            <div class="auth-feature"><i class="fas fa-check-circle"></i> Track real-time status</div>
+            <div class="auth-feature"><i class="fas fa-check-circle"></i> View complaint history</div>
+          </div>
+        </div>
+      </div>
+      <div class="auth-right">
+        <div class="auth-card">
+          <div class="auth-card-header">
+            <div class="auth-avatar"><i class="fas fa-user-graduate"></i></div>
+            <h1>Student Login</h1>
+            <p>Enter your credentials to continue</p>
+          </div>
+
+          <!-- Alert messages -->
+          <div class="alert alert-error" id="loginError" style="display:none;"></div>
+          <div class="alert alert-success" id="loginSuccess" style="display:none;"></div>
+
+          <form id="loginForm" class="auth-form" novalidate>
+            <div class="form-group">
+              <label for="loginEmail"><i class="fas fa-envelope"></i> Email / Enrollment No.</label>
+              <input type="text" id="loginEmail" name="email" placeholder="Enter your email or enrollment no." required/>
+              <span class="field-error" id="loginEmailErr"></span>
+            </div>
+            <div class="form-group">
+              <label for="loginPassword"><i class="fas fa-lock"></i> Password</label>
+              <div class="input-with-icon">
+                <input type="password" id="loginPassword" name="password" placeholder="Enter your password" required/>
+                <button type="button" class="toggle-pass" onclick="togglePassword('loginPassword', this)">
+                  <i class="fas fa-eye"></i>
+                </button>
+              </div>
+              <span class="field-error" id="loginPassErr"></span>
+            </div>
+            <div class="form-check-row">
+              <label class="checkbox-label">
+                <input type="checkbox" id="rememberMe"/> Remember me
+              </label>
+              <a href="#" class="forgot-link">Forgot password?</a>
+            </div>
+            <button type="submit" class="btn-form-submit" id="loginBtn">
+              <span class="btn-text"><i class="fas fa-sign-in-alt"></i> Login</span>
+              <span class="btn-loader" style="display:none;"><i class="fas fa-spinner fa-spin"></i> Logging in...</span>
+            </button>
+          </form>
+
+          <div class="auth-divider"><span>or</span></div>
+          <p class="auth-switch">Don't have an account? <a href="student-register.html">Register here</a></p>
+          <p class="auth-switch"><a href="admin-login.html"><i class="fas fa-user-shield"></i> Admin Login →</a></p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

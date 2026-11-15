@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard – CampusCare</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+</head>
+<body class="dashboard-page admin-dashboard-page" id="adminDashboardPage">
+
+  <!-- Admin Sidebar -->
+  <aside class="sidebar admin-sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-brand">
+        <div class="brand-icon small"><i class="fas fa-university"></i></div>
+        <div class="brand-text">
+          <span class="brand-name">CampusCare</span>
+        </div>
+      </div>
+      <button class="sidebar-close" id="sidebarClose"><i class="fas fa-times"></i></button>
+    </div>
+
+    <div class="sidebar-user">
+      <div class="sidebar-avatar admin-sb-avatar"><i class="fas fa-user-shield"></i></div>
+      <div class="sidebar-user-info">
+        <span class="sidebar-user-name">Administrator</span>
+        <span class="sidebar-user-role admin-role">Super Admin</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <ul>
+        <li class="nav-item active" data-page="overview">
+          <a href="#overview"><i class="fas fa-th-large"></i> Overview</a>
+        </li>
+        <li class="nav-item" data-page="allcomplaints">
+          <a href="#allcomplaints"><i class="fas fa-inbox"></i> All Complaints</a>
+        </li>
+        <li class="nav-item" data-page="escalated">
+          <a href="#escalated"><i class="fas fa-level-up-alt"></i> Escalated <span class="sidebar-badge" id="adminEscalateBadge" style="display:none"></span></a>
+        </li>
+        <li class="nav-item" data-page="students">
+          <a href="#students"><i class="fas fa-users"></i> Registered Students</a>
+        </li>
+        <li class="nav-item" data-page="reports">
+          <a href="#reports"><i class="fas fa-chart-bar"></i> Reports</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="btn-dark-toggle sidebar-dark-btn" id="darkToggle" title="Toggle Dark Mode">
+        <i class="fas fa-moon"></i> Dark Mode
+      </button>
+      <button class="btn-logout admin-logout" id="adminLogout">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="main-wrapper" id="mainWrapper">
+    <header class="topbar admin-topbar">
+      <button class="topbar-menu-btn" id="menuToggle"><i class="fas fa-bars"></i></button>
+      <div class="topbar-title" id="topbarTitle">Admin Overview</div>
+      <div class="topbar-actions">
+        <div class="topbar-user">
+          <div class="topbar-avatar admin-tb-avatar"><i class="fas fa-user-shield"></i></div>
+          <span>Admin</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="dashboard-content">
+
+      <!-- ============ ADMIN OVERVIEW ============ -->
+      <section class="dash-page active" id="page-overview">
+        <div class="page-header">
+          <h2>Admin Dashboard Overview</h2>
+          <p class="page-subtitle">Complete view of all campus complaints and system statistics.</p>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card blue">
+            <div class="stat-card-icon"><i class="fas fa-inbox"></i></div>
+            <div class="stat-card-info">
+              <span class="stat-card-num" id="adminStatTotal">0</span>
+              <span class="stat-card-label">Total Complaints</span>
+            </div>
+          </div>
+          <div class="stat-card orange">
+            <div class="stat-card-icon"><i class="fas fa-clock"></i></div>
+            <div class="stat-card-info">
+              <span class="stat-card-num" id="adminStatPending">0</span>
+              <span class="stat-card-label">Pending</span>
+            </div>
+          </div>
+          <div class="stat-card teal">
+            <div class="stat-card-icon"><i class="fas fa-spinner"></i></div>
+            <div class="stat-card-info">
+              <span class="stat-card-num" id="adminStatInProgress">0</span>
+              <span class="stat-card-label">In Progress</span>
+            </div>
+          </div>
+          <div class="stat-card green">
+            <div class="stat-card-icon"><i class="fas fa-check-circle"></i></div>
+            <div class="stat-card-info">
+              <span class="stat-card-num" id="adminStatResolved">0</span>
+              <span class="stat-card-label">Resolved</span>
+            </div>
+          </div>
+          <div class="stat-card purple">
+            <div class="stat-card-icon"><i class="fas fa-users"></i></div>
+            <div class="stat-card-info">
+              <span class="stat-card-num" id="adminStatStudents">0</span>
+              <span class="stat-card-label">Registered Students</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category Breakdown -->
+        <div class="dash-section">
+          <div class="dash-section-header">
+            <h3><i class="fas fa-chart-pie"></i> Complaints by Category</h3>
+          </div>
+          <div class="category-breakdown" id="categoryBreakdown">
+            <!-- Filled by JS -->
+          </div>
+        </div>
+
+        <!-- Recent Complaints (Admin view) -->
+        <div class="dash-section">
+          <div class="dash-section-header">
+            <h3><i class="fas fa-history"></i> Recent Complaints</h3>
+            <button class="btn-link" onclick="switchPage('allcomplaints')">View All <i class="fas fa-arrow-right"></i></button>
+          </div>
+          <div class="complaints-table-wrap">
+            <table class="complaints-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Student</th>
+                  <th>Title</th>
+                  <th>Category</th>
+                  <th>Priority</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Flags</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="adminRecentBody">
+                <tr><td colspan="8" class="empty-row"><i class="fas fa-inbox"></i> No complaints yet</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ ALL COMPLAINTS ============ -->
+      <section class="dash-page" id="page-allcomplaints">
+        <div class="page-header">
+          <h2><i class="fas fa-inbox"></i> All Complaints</h2>
+          <p class="page-subtitle">View, update, and manage all submitted complaints</p>
+        </div>
+
+        <!-- Admin Filter Bar -->
+        <div class="filter-bar">
+          <div class="filter-group">
+            <i class="fas fa-filter"></i>
+            <select id="adminFilterStatus">
+              <option value="">All Status</option>
+              <option value="Pending">Pending</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Resolved">Resolved</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <i class="fas fa-tag"></i>
+            <select id="adminFilterCategory">
+              <option value="">All Categories</option>
+              <option value="Electrical">Electrical</option>
+              <option value="Water">Water</option>
+              <option value="Cleanliness">Cleanliness</option>
+              <option value="WiFi">WiFi</option>
+              <option value="Classroom">Classroom</option>
+              <option value="Hostel">Hostel</option>
+              <option value="Others">Others</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <i class="fas fa-exclamation-triangle"></i>
+            <select id="adminFilterPriority">
+              <option value="">All Priorities</option>
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+              <option value="Urgent">Urgent</option>
+            </select>
+          </div>
+          <div class="search-group">
+            <i class="fas fa-search"></i>
+            <input type="text" id="adminSearchComplaints" placeholder="Search by ID, title, student..."/>
+          </div>
+        </div>
+
+        <div class="complaints-table-wrap">
+          <table class="complaints-table admin-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Student</th>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Priority</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Flags</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="adminAllComplaintsBody">
+              <tr><td colspan="8" class="empty-row"><i class="fas fa-inbox"></i> No complaints yet</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ============ ESCALATED COMPLAINTS (ADMIN) ============ -->
+      <section class="dash-page" id="page-escalated">
+        <div class="page-header">
+          <h2><i class="fas fa-level-up-alt"></i> Escalated Complaints</h2>
+          <p class="page-subtitle">Complaints escalated by students to higher authority — require priority attention</p>
+        </div>
+        <div class="escalation-info-banner admin-escalation-banner">
+          <i class="fas fa-exclamation-triangle"></i>
+          <div>
+            <strong>Action Required</strong>
+            <p>These complaints have been escalated directly to you. Please review and update the status within 24 hours.</p>
+          </div>
+        </div>
+        <div class="complaints-table-wrap">
+          <table class="complaints-table">
+            <thead>
+              <tr>
+                <th>Complaint ID</th>
+                <th>Student</th>
+                <th>Title</th>
+                <th>Escalated To</th>
+                <th>Priority</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Photos</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="adminEscalatedBody">
+              <tr><td colspan="9" class="empty-row"><i class="fas fa-level-up-alt"></i><br>No escalated complaints</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ============ STUDENTS ============ -->
+      <section class="dash-page" id="page-students">
+        <div class="page-header">
+          <h2><i class="fas fa-users"></i> Registered Students</h2>
+          <p class="page-subtitle">All students registered on the CampusCare portal</p>
+        </div>
+
+        <div class="filter-bar">
+          <div class="search-group">
+            <i class="fas fa-search"></i>
+            <input type="text" id="adminSearchStudents" placeholder="Search students by name, email, enrollment..."/>
+          </div>
+        </div>
+
+        <div class="complaints-table-wrap">
+          <table class="complaints-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Enrollment No.</th>
+                <th>Email</th>
+                <th>Department</th>
+                <th>Year</th>
+                <th>Phone</th>
+                <th>Registered On</th>
+              </tr>
+            </thead>
+            <tbody id="studentsTableBody">
+              <tr><td colspan="8" class="empty-row"><i class="fas fa-users"></i> No students registered yet</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ============ REPORTS ============ -->
+      <section class="dash-page" id="page-reports">
+        <div class="page-header">
+          <h2><i class="fas fa-chart-bar"></i> Reports & Analytics</h2>
+          <p class="page-subtitle">Summary statistics and complaint trends</p>
+        </div>
+
+        <div class="reports-grid">
+          <div class="report-card">
+            <h3><i class="fas fa-chart-pie"></i> Status Distribution</h3>
+            <div id="statusChart" class="bar-chart-container">
+              <!-- Filled by JS -->
+            </div>
+          </div>
+          <div class="report-card">
+            <h3><i class="fas fa-tag"></i> Complaints by Category</h3>
+            <div id="categoryChart" class="bar-chart-container">
+              <!-- Filled by JS -->
+            </div>
+          </div>
+          <div class="report-card">
+            <h3><i class="fas fa-exclamation-triangle"></i> Priority Breakdown</h3>
+            <div id="priorityChart" class="bar-chart-container">
+              <!-- Filled by JS -->
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Status Update Modal -->
+  <div class="modal-overlay" id="modalOverlay" style="display:none;">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="modalTitle"><i class="fas fa-edit"></i> Manage Complaint</h3>
+        <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- Notification -->
+  <div class="notification-popup" id="notificationPopup" style="display:none;">
+    <div class="notif-icon"><i class="fas fa-check-circle"></i></div>
+    <div class="notif-content">
+      <strong id="notifTitle">Done!</strong>
+      <p id="notifMsg">Action completed successfully.</p>
+    </div>
+    <button class="notif-close" onclick="closeNotification()"><i class="fas fa-times"></i></button>
+  </div>
+
+  <!-- Sidebar Overlay -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
