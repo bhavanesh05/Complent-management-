@@ -178,4 +178,4 @@ localStorage.setItem("cc_complaints", JSON.stringify(filtered));
 
 ---
 
-*CampusCare – Designed as a 4th Semester College Mini Project*
+*CampusCare – Designed as a 5th Semester College Mini Project*
