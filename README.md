@@ -1,5 +1,5 @@
 # CampusCare – Smart Complaint Management System
-### College Mini-Project | 4th Semester | HTML + CSS + JS
+### College Mini-Project | 5th Semester | HTML + CSS + JS
 
 ---
 
